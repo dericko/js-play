@@ -1,4 +1,5 @@
 import './App.css';
+import LoginComponent from './LoginComponent';
 
 function App() {
   return (
@@ -11,12 +12,7 @@ function App() {
           display: 'flex',
           flexDirection: 'column',
         }}>
-          <p>
-            The most minimal TSX React app we could do
-          </p>
-          <textarea rows={10} />
-          <button>Clicky</button>
-
+          <LoginComponent />
         </div>
       </main>
       <footer className="App-footer">App Footer</footer>
