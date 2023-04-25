@@ -29,6 +29,52 @@ app.get('/users', (req, res) => {
     res.send(usersWithEmails);
 });
 
+app.get('/data', (req, res) => {
+    // a nested array of objects with nested objects and strings and comma-separated lists of attributes
+    const data = [
+        {
+            id: 1,
+            name: 'John',
+            age: 20,
+            address: {
+                street: '123 Park St',
+                city: 'Anytown',
+                state: 'NY',
+                zip: 12345
+            },
+            hobbies: ['guitar', 'hiking', 'biking'],
+            longSentenceWithManyCommas: 'This, is, a, long, sentence, with, many, commas',
+        },
+        {
+            id: 2,
+            name: 'Jane',
+            age: 25,
+            address: {
+                street: '456 Main St',
+                city: 'Othertown',
+                state: 'CA',
+                zip: 67890
+            },
+            hobbies: ['running', 'biking', 'swimming'],
+            longSentenceWithManyCommas: 'This, is, another, long, sentence, with, many, commas',
+        },
+        {
+            id: 3,
+            name: 'Joe',
+            age: 30,
+            address: {
+                street: '789 Broadway',
+                city: 'Somewhere',
+                state: 'TX',
+                zip: 13579
+            },
+            hobbies: ['movies', 'music', 'swimming'],
+            longSentenceWithManyCommas: 'This, is, yet, another, long, sentence, with, many, commas',
+        }
+    ];
+    res.send(data);
+}
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
