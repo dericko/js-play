@@ -9,13 +9,12 @@ app.get('/', (req, res) => {
 // add query params to route
 app.get('/authenticate', (req, res) => {
     const { username, password } = req.query;
-    console.log('auth!', req.query)
     if (username === 'admin' && password === 'password') {
-        res.send(`Welcome ${username}!`);
+        res.send({ message: `Welcome ${username}!` });
     } else if (username !== 'admin') {
-        res.send({ error: 'Invalid username' });
+        res.status(401).send({ error: 'Invalid username' });
     } else if (password !== 'password') {
-        res.send({ error: 'Invalid password' });
+        res.status(401).send({ error: 'Invalid password' });
     } else {
         res.status(401).send({ error: 'Unauthorized' });
     }
