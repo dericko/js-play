@@ -5,29 +5,43 @@ function LoginComponent() {
   const [message, setMessage] = useState('Logged Out');
   const [username, setUsername] = useState('user');
   const [password, setPassword] = useState('pw');
-  const [invalidUsername, setInvalidUsername] = useState(false);
-  const [invalidPassword, setInvalidPassword] = useState(false);
+  const [invalidUsername, setInvalidUsername] = useState({ invalid: false, message: ''});
+  const [invalidPassword, setInvalidPassword] = useState({ invalid: false, message: '' });
+  const isLoggedIn = message.startsWith('Welcome');
   const handleSubmit = async () => {
+    // validate username and password before sending to server
+    if (!username || username.length < 3) {
+      setInvalidUsername({ invalid: true, message: 'Username must be at least 3 characters' });
+      return;
+    }
+    if (!password || password.length < 3) {
+      setInvalidPassword({ invalid: true, message: 'Password must be at least 3 characters' });
+      return;
+    }
+
+    // send credentials to server
     const queryParams = new URLSearchParams({
       username,
       password
     });
     const res = await fetch(`http://localhost:3000/authenticate?${queryParams}`)
     const json = await res.json();
+
+    // validate response from server
     if (json.message) {
       setMessage(json.message);
-      setInvalidUsername(false);
-      setInvalidPassword(false);
+      setInvalidUsername({ invalid: false, message: '' });
+      setInvalidPassword({ invalid: false, message: '' });
     } else if (json.error === 'Invalid username') {
-      setInvalidUsername(true);
-      setInvalidPassword(false);
+      setInvalidUsername({ invalid: true, message: 'Invalid username' });
+      setInvalidPassword({ invalid: false, message: '' });
     } else if (json.error === 'Invalid password') {
-      setInvalidPassword(true);
-      setInvalidUsername(false);
+      setInvalidPassword({ invalid: true, message: 'Invalid password' });
+      setInvalidUsername({ invalid: false, message: '' });
     } else {
       setMessage('Unknown error');
-      setInvalidUsername(false);
-      setInvalidPassword(false);
+      setInvalidUsername({ invalid: false, message: '' });
+      setInvalidPassword({ invalid: false, message: '' });
       console.log(json);
     }
   }
@@ -39,7 +53,7 @@ function LoginComponent() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <label htmlFor="username">Username</label>
-      {invalidUsername && <div style={{ color: 'red' }}>Invalid username</div>}
+      {invalidUsername.invalid && <div style={{ color: 'red' }}>{invalidUsername.message}</div>}
       <input type='text' id="username"
         placeholder="Username"
         defaultValue={username}
@@ -47,7 +61,7 @@ function LoginComponent() {
         onChange={e => setUsername(e.target.value)}
       />
       <label htmlFor="password">Password</label>
-      {invalidPassword && <div style={{ color: 'red' }}>Invalid password</div>}
+      {invalidPassword.invalid && <div style={{ color: 'red' }}>{invalidPassword.message}</div>}
       <input type="text"
         id="password"
         placeholder="Password"
@@ -56,7 +70,7 @@ function LoginComponent() {
         onChange={e => setPassword(e.target.value)}
       />
       <button onClick={handleSubmit}>Submit</button>
-      <div>Status: {message} </div>
+      <div style={{ color: isLoggedIn ? 'green' : 'red' }}>{message}</div>
     </div>
   )
 }
