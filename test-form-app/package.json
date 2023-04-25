@@ -2,6 +2,7 @@
   "name": "empty-ts",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3333",
   "dependencies": {
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
