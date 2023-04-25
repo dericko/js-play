@@ -20,6 +20,15 @@ app.get('/authenticate', (req, res) => {
     }
 });
 
+app.get('/users', (req, res) => {
+    const usersWithEmails = [
+        { name: 'John', email: 'test1@test.com', id: 1 },
+        { name: 'Jane', email: 'test2@test.com', id: 2 },
+        { name: 'Joe', email: 'test3@test.com', id: 3 },
+    ];
+    res.send(usersWithEmails);
+});
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
