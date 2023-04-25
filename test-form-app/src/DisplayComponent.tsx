@@ -22,11 +22,8 @@ function DisplayComponent() {
             <h3>Users</h3>
             <div style={{
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
             }}>
-                {users.map((user: { name: string, email: string, id: string}) => (
+                {users.map((user: { name: string, email: string, id: string }) => (
                     <p style={{
                         border: 'solid',
                         borderColor: 'black',
