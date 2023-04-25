@@ -22,12 +22,17 @@ function LoginComponent() {
       console.log(json);
     }
   }
+  const handleKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  }
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <label htmlFor="username">Username</label>
       <input type='text' id="username" placeholder="Username" defaultValue={username} onChange={e => setUsername(e.target.value)} />
       <label htmlFor="password">Password</label>
-      <input type="text" id="password" placeholder="Password" defaultValue={password} onChange={e => setPassword(e.target.value)} />
+      <input type="text" id="password" placeholder="Password" defaultValue={password} onKeyDown={handleKeydown} onChange={e => setPassword(e.target.value)} />
       <button onClick={handleSubmit}>Submit</button>
       <div>Status: {message} </div>
     </div>
