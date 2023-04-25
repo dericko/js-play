@@ -1,0 +1,28 @@
+.App {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.App-header {
+    font-size: large;
+    padding: 10vh;
+    background-color: lightseagreen;
+    border: solid green 2px;
+}
+
+.App-body {
+    flex: 1 0 auto;
+    padding: 0 20vw;
+    border: solid red 2px;
+}
+
+.App-footer {
+    font-size: small;
+    background-color: lightslategray;
+    border: solid blue 2px;
+    padding: 10px;
+    width: 100%;
+}
