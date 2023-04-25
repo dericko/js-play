@@ -3,7 +3,19 @@ const app = express();
 const port = 3333;
 
 app.get('/', (req, res) => {
-    res.send('Hello!');
+    // show all the routes in the response with links to each
+    const routes = app._router.stack
+        .filter((r) => r.route)
+        .map((r) => {
+            return {
+                method: Object.keys(r.route.methods)[0].toUpperCase(),
+                path: r.route.path,
+            };
+        });
+    const html = routes.reduce((acc, r) => {
+        return `${acc}<div><a href="${r.path}">${r.method} - ${r.path}</a></div>`;
+    }, '');
+    res.send(html);
 });
 
 // add query params to route
@@ -100,7 +112,7 @@ app.get('/testCGInvalid', (req, res) => {
     res.send(data);
 });
 
-app.get('testCGValid', (req, res) => {
+app.get('/testCGValid', (req, res) => {
     const data = {
         data: {
             isValid: true,
