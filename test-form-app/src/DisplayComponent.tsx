@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function DisplayComponent() {
     const [users, setUsers] = useState([]);
-    const fetchUsers = useEffect(() => {
+    useEffect(() => {
         const fetchUsers = async () => {
             const res = await fetch('http://localhost:3000/users')
             const users = await res.json();

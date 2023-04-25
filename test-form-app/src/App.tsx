@@ -1,5 +1,6 @@
 import './App.css';
 import DisplayComponent from './DisplayComponent';
+import ListComponent from './ListComponent';
 import LoginComponent from './LoginComponent';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         }}>
           <LoginComponent />
           <DisplayComponent />
+          <ListComponent />
         </div>
       </main>
       <footer className="App-footer">App Footer</footer>
