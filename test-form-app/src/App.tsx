@@ -1,4 +1,5 @@
 import './App.css';
+import DisplayComponent from './DisplayComponent';
 import LoginComponent from './LoginComponent';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           flexDirection: 'column',
         }}>
           <LoginComponent />
+          <DisplayComponent />
         </div>
       </main>
       <footer className="App-footer">App Footer</footer>
